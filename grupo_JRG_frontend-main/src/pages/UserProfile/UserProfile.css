@@ -1,0 +1,248 @@
+/* Contenedor principal */
+.container-user-profile {
+  width: 100%;
+  margin: 20px auto;
+  background-color: #fff;
+  border-radius: 10px;
+}
+
+.container-user-profile img{
+  width: 20%;
+  height: 20%;
+}
+
+.user-container {
+  align-items: center;
+  display: flex;
+  text-align: center;
+  justify-content:space-around;
+  margin-bottom: 20px;
+  padding: 20px;
+  border-bottom: 1px solid #ccc;
+}
+
+.user-container h1 {
+  display: flex;
+  text-align: center;
+  color: #333;
+  align-items: center;
+}
+.user-container h3 {
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+}
+
+.user-info {
+  text-align: left;
+  margin-top: 10px;
+}
+
+.user-container p {
+  margin: 5px 0;
+}
+
+/* Estilos para la lista de equipos */
+.teams-container {
+  display: flex;
+  flex-direction: row;
+  background-color: #ececec;
+  border-radius: 30px;
+  margin: 30px;
+}
+
+.teams-container h1 {
+  align-items: center;
+  display: flex;
+  text-align: center;
+  justify-content:space-around;
+  font-size: 30px;
+  margin-bottom: 20px;
+  width: 30%;
+  box-sizing: border-box;
+  border-radius: 10px;
+  color: #1b2430;
+}
+
+.teams-container table {
+  width: 70%;
+  border-collapse: collapse;
+}
+
+.teams-container th, .teams-container td {
+  border-bottom: 1px solid #fff;
+  text-align: center;
+  padding: 25px;
+}
+
+.teams-container .view-team{
+  cursor: pointer;
+  justify-content: center;
+  align-items: center;
+  margin: 15px;
+  padding: 15px 30px;
+  background-color: #17cf97;
+  color: #fff;
+  font-weight: bold;
+  border-radius: 20px;
+  transition: background-color 0.1s;
+  box-shadow: 0px 4px 10px -3px rgba(0,0,0,0.75);
+  text-decoration: none;
+}
+
+.teams-container .view-team:hover {
+  transition: 0.4s;
+  background-color: #1b2430;
+}
+
+.teams-container .exit-team{
+  cursor: pointer;
+  align-items: center;
+  margin: 15px;
+  padding: 15px 30px;
+  background-color: #fe5f5f;
+  color: #fff;
+  font-weight: bold;
+  border-radius: 20px;
+  transition: background-color 0.1s;
+  box-shadow: 0px 4px 10px -3px rgba(0,0,0,0.75);
+  text-decoration: none;
+}
+
+.teams-container .exit-team:hover {
+  transition: 0.4s;
+  background-color: #1b2430;
+}
+
+
+.pending-container {
+  display: flex;
+  flex-direction: row;
+  background-color: #ececec;
+  border-radius: 30px;
+  margin: 30px;
+}
+
+.pending-container h1 {
+  align-items: center;
+  display: flex;
+  text-align: center;
+  justify-content:space-around;
+  font-size: 30px;
+  margin-bottom: 20px;
+  width: 30%;
+  box-sizing: border-box;
+  border-radius: 10px;
+  color: #1b2430;
+}
+
+.pending-container table {
+  width: 70%;
+  border-collapse: collapse;
+}
+
+.pending-container th, .pending-container td {
+  border-bottom: 1px solid #fff;
+  text-align: center;
+  padding: 15px;
+}
+
+.pending-container .button-delete-request {
+  cursor: pointer;
+  display: inline-block;
+  margin: 15px;
+  padding: 15px 30px;
+  background-color: #fe5f5f;
+  color: #fff;
+  font-weight: bold;
+  border-radius: 20px;
+  transition: background-color 0.1s;
+  box-shadow: 0px 4px 10px -3px rgba(0,0,0,0.75);
+  text-decoration: none;
+}
+
+.pending-container .button-delete-request:hover {
+  transition: 0.4s;
+  background-color: #1b2430;
+}
+.pending-container .button-disabled-request {
+  cursor: no-drop;
+  display: inline-block;
+  margin: 15px;
+  padding: 15px 30px;
+  background-color: #6d6d6d;
+  color: #fff;
+  font-weight: bold;
+  border-radius: 20px;
+  transition: background-color 0.1s;
+  box-shadow: 0px 4px 10px -3px rgba(0,0,0,0.75);
+  text-decoration: none;
+}
+
+.request-container {
+  display: flex;
+  flex-direction: row;
+  padding: 20px;
+  background-color: #ececec;
+  border-radius: 30px;
+  margin: 30px;
+}
+
+.request-container h1 {
+  align-items: center;
+  display: flex;
+  text-align: center;
+  justify-content:space-around;
+  font-size: 30px;
+  margin-bottom: 20px;
+  width: 30%;
+  box-sizing: border-box;
+  border-radius: 10px;
+  color: #1b2430;
+}
+.request-container .decline-button {
+  cursor: pointer;
+  display: inline-block;
+  margin: 15px;
+  padding: 15px 30px;
+  background-color: #fe5f5f;
+  color: #fff;
+  font-weight: bold;
+  border-radius: 20px;
+  transition: background-color 0.1s;
+  box-shadow: 0px 4px 10px -3px rgba(0,0,0,0.75);
+  text-decoration: none;
+}
+
+.request-container .decline-button:hover {
+  transition: 0.4s;
+  background-color: #1b2430;
+}
+
+.request-container .success-button {
+  cursor: pointer;
+  display: inline-block;
+  margin: 15px;
+  padding: 15px 30px;
+  background-color: #17cf97;
+  color: #fff;
+  font-weight: bold;
+  border-radius: 20px;
+  transition: background-color 0.1s;
+  box-shadow: 0px 4px 10px -3px rgba(0,0,0,0.75);
+  text-decoration: none;
+}
+.request-container .success-button:hover {
+  transition: 0.4s;
+  background-color: #1b2430;
+}
+
+.request-container table {
+  width: 70%;
+  border-collapse: collapse;
+}
+
+.request-container th, .request-container td {
+  border-bottom: 1px solid #fff;
+  text-align: center;
+  padding: 20px;
+}

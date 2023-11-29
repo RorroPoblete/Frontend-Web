@@ -1,0 +1,81 @@
+/* teamsList.css */
+.teams-list {
+    text-align: center;
+    padding: 20px;
+  }
+  
+  .teams-list h1 {
+    font-size: 40px;
+    font-weight: bold;
+    margin: 0;
+    text-shadow: 0px 5px 5px rgba(0, 0, 0, 0.15);
+  }
+  
+  .teams-list table {
+    margin: 20px auto;
+    border-collapse: collapse;
+    width: 80%;
+  
+    box-shadow: 0px 4px 10px -3px rgba(0, 0, 0, 0.1);
+  }
+  
+  .teams-list th, .teams-list td {
+    padding: 10px;
+    text-align: center;
+  }
+  
+  .teams-list th {
+    background-color: #17cf97;
+    color: #fff;
+    font-weight: bold;
+  }
+  
+  .teams-list tr:nth-child(even) {
+    background-color: #f2f2f2; /* Cambia el color de fondo de filas pares */
+  }
+  
+  .teams-list button.join-button {
+    display: inline-block;
+    margin: 15px;
+    padding: 10px;
+    background-color: #17cf97;
+    color: #fff;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: background-color 0.4s;
+    box-shadow: 0px 5px 5px -3px rgba(0,0,0,0.75);
+    text-decoration: none;
+}
+  
+  .teams-list button.join-button:hover {
+    background-color: #1b2430;
+  }
+
+  .teams-list button.disabled-button {
+    cursor:no-drop;
+    display: inline-block;
+    margin: 15px;
+    padding: 10px;
+    background-color: #6d6d6d;
+    color: #fff;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: background-color 0.1s;
+    box-shadow: 0px 5px 5px -3px rgba(0,0,0,0.75);
+    text-decoration: none;
+
+}
+
+.teams-list button.pending-button {
+    cursor:no-drop;
+    display: inline-block;
+    margin: 15px;
+    padding: 10px;
+    background-color: #f2d467;
+    color: #fff;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: background-color 0.1s;
+    box-shadow: 0px 5px 5px -3px rgba(0,0,0,0.75);
+    text-decoration: none;
+}

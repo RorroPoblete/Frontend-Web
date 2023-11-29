@@ -1,0 +1,66 @@
+/* Estilos para el formulario */
+.create-team {
+  background: linear-gradient(180deg, #ffffff 50%, #dcedff, #1b2430);
+  max-width: 100%;
+  /* margin-top: 0px; */
+  width: 100%;
+  height: 91vh;
+}
+
+.create-team form {
+  
+    flex-direction: column;
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #f7f6f6;
+    border-radius: 10px;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+    font-family: 'Red Hat Display';
+  }
+  
+  .create-team label {
+    display: block;
+    margin: 20px;
+    text-align: center;
+  }
+  
+  .create-team input,
+  select {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-family: 'Red Hat Display';
+    background-color: #1b2430;
+    text-align: center;
+  }
+  .create-team select {
+    cursor: pointer;
+  }
+  
+.create-team button {
+    background-color: #17cf97;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 100%;
+    transition: background-color 0.1s;
+    box-shadow: 0px 4px 10px -3px rgba(0,0,0,0.75);
+    text-decoration: none;
+    font-weight: bold;
+  }
+  
+  .create-team button:hover {
+    transition: 0.6s;
+    background-color: #118a65;
+  }
+  
+  .create-team h1 {
+    font-size: 60px;
+  }

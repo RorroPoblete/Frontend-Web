@@ -1,0 +1,73 @@
+/* Estilos para pantallas más grandes (desktop) */
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #1b2430;
+  padding: 10px 80px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  height: 9vh;
+}
+
+#navbar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#navbar li {
+  list-style: none;
+  padding: 20px;
+  position: relative;
+}
+
+#navbar li a {
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #fff;
+  transition: 0.3s ease-in-out;
+}
+
+#navbar li a:hover,
+#navbar li.active {
+  color: #17cf97;
+}
+
+#navbar li a:hover::after,
+#navbar li.active::after {
+  content: "";
+  width: 30%;
+  height: 2px;
+  background: #17cf97;
+  position: absolute;
+  bottom: -3px;
+  left: 20px;
+}
+
+.logo {
+  width: 100px;
+  height: 30px;
+  margin-right: 10px;
+  object-fit: cover;
+  transform: scale(2);
+  transition: transform 0.2s ease-in-out;
+}
+
+/* Estilos para pantallas más pequeñas (móviles) */
+@media (max-width: 768px) {
+  .nav {
+    flex-direction: column;
+    padding: 10px;
+  }
+
+  #navbar {
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+  }
+
+  #navbar li {
+    padding: 10px 0;
+  }
+}

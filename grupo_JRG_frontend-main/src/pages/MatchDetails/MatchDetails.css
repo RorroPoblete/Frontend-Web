@@ -1,0 +1,54 @@
+
+  /* Estilos del contenedor principal */
+  .container-match-view {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: auto;
+    padding: 40px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+  }
+  
+  /* Estilos de los títulos */
+  .container-match-view h1 {
+    font-size: 24px;
+    margin-bottom: 16px;
+  }
+  
+  .container-match-view h2 {
+    font-size: 18px;
+    margin-top: 10px;
+  }
+  
+  /* Estilos de los labels e inputs */
+  .container-match-view label {
+    font-family: 'Red Hat Display';
+    display: block;
+    margin-top: 10px;
+  }
+  
+  .container-match-view input {
+    font-family: 'Red Hat Display';
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+    margin-top: 5px;
+  }
+  
+  /* Estilos del botón */
+  button {
+    padding: 10px 20px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+  }
+  
+  
+  

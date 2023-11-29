@@ -1,0 +1,108 @@
+.chat-tittle {
+    text-align: center;
+  }
+  
+.messages-container {
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    background-color: #f2f2f2;
+    padding-right: 15px;
+    padding-left: 15px;
+    height: 60vh;
+}
+
+.message {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    min-width: 10%;
+    max-width: 50%;
+    margin-bottom: 10px;
+    padding: 6px 12px; /* Espaciado interno de los mensajes */
+    border-radius: 20px; /* Bordes redondeados */
+    margin-bottom: 12px; /* Espacio entre mensajes */
+    position: relative; /* Para posicionar el timestamp */
+    word-wrap: break-word; /* Asegura que el texto no desborde el contenedor */
+    text-align: left;
+}
+
+.my-message .message-sender,
+.my-message .message-content,
+.my-message .message-timestamp {
+    align-self: flex-end; /* Alinea el contenido de tus mensajes a la derecha */
+}
+
+.their-message .message-sender,
+.their-message .message-content {
+    align-self: flex-start; /* Alinea el contenido de los mensajes de otros a la izquierda */
+}
+
+.my-message {
+    background-color: #17cf97;
+    color: white; /* Texto blanco para tus mensajes */
+    align-self: flex-end; /* Alinea tus mensajes a la derecha */
+    margin-left: auto; /* Asegura que el mensaje se pegue a la derecha */
+}
+
+.their-message {
+    background-color: #e5e5ea;
+    color: black; /* Texto oscuro para mensajes de otros */
+    align-self: flex-start; /* Alinea mensajes de otros a la izquierda */
+}
+
+.message-sender {
+    align-items: flex-start;
+    font-weight: bold;
+    margin-bottom: 4px;
+}
+
+.message-content {
+    position: relative;
+    padding-bottom: 10px;
+    border-radius: 16px; /* Bordes redondeados para la burbuja */
+    margin: 2px 0; /* Espaciado exterior para separar de otros elementos si es necesario */
+    word-wrap: break-word; /* Asegura que el texto largo se ajuste dentro de la burbuja */
+    text-align: left;
+}
+
+.message-timestamp {
+    font-weight: bold;
+    font-size: 0.8rem;
+    position: absolute; /* Posiciona el timestamp en relación al mensaje */
+    /* bottom: -15px; */
+    right: 5px;
+    /* padding-bottom: 8px; */
+}
+
+.their-message .message-timestamp {
+    right: auto; /* Anula la alineación a la derecha para mensajes de otros */
+    /* left: 5px; */
+}
+
+.chat-input-container {
+    display: flex;
+    padding: 10px;
+}
+
+.chat-input-container input {
+    flex-grow: 1;
+    border: none;
+    padding: 10px;
+    border-radius: 20px;
+    border-style: solid;
+    margin-right: 10px;
+}
+
+.chat-input-container button {
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    background-color: #17cf97;
+    color: white;
+    cursor: pointer;
+}
+
+.chat-input-container button:hover {
+    background-color: #149e75;
+}

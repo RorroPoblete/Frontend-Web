@@ -1,0 +1,58 @@
+.match-view-container {
+    width: 100%;
+    margin: 20px auto;
+    background-color: #fff;
+    border-radius: 10px;
+}
+
+
+.matchs-container {
+    display: flex;
+    flex-direction: row;
+    background-color: #ececec;
+    border-radius: 30px;
+    margin: 30px;
+  }
+  
+  .matchs-container h1 {
+    align-items: center;
+    display: flex;
+    text-align: center;
+    justify-content:space-around;
+    font-size: 30px;
+    margin-bottom: 20px;
+    width: 30%;
+    box-sizing: border-box;
+    border-radius: 10px;
+    color: #1b2430;
+  }
+  
+  .matchs-container table {
+    width: 70%;
+    border-collapse: collapse;
+  }
+  
+  .matchs-container th, .matchs-container td {
+    border-bottom: 1px solid #fff;
+    text-align: center;
+    padding: 25px;
+  }
+
+  .matchs-container .view-team{
+    cursor: pointer;
+    justify-content: center;
+    align-items: center;
+    margin: 15px;
+    padding: 15px 30px;
+    background-color: #17cf97;
+    color: #fff;
+    font-weight: bold;
+    border-radius: 20px;
+    transition: background-color 0.1s;
+    box-shadow: 0px 4px 10px -3px rgba(0,0,0,0.75);
+    text-decoration: none;
+  }
+  .matchs-container .view-team:hover {
+    transition: 0.4s;
+    background-color: #1b2430;
+  }

@@ -1,0 +1,75 @@
+.not-landing-hero {
+    background: linear-gradient(165deg, #1b2430 35%, #263344, #414757);
+    background-color: #1b2430;
+    color: white;
+    max-width: 100%;
+    /* margin-top: 0px; */
+    width: 100%;
+    height: 91vh;
+    margin-right: auto;
+    margin-left: auto;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.highlight-text {
+    color: #17cf97;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.main-heading {
+    font-size: 60px;
+}
+
+.flex-container {
+    padding-bottom: 10px;
+}
+
+.typed-text {
+    font-size: 30px;
+    font-weight: bold;
+}
+
+
+.description-text {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.features-box {
+    height: 50hv;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 4rem;
+    padding: 4rem 1rem;
+}
+
+.feature {
+    flex: 1 1 calc(33.333% - 4rem);
+    max-width: calc(33.333% - 4rem);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin: 0;
+}
+
+.feature-icon {
+    margin-bottom: 0;
+}
+
+.feature-title {
+    font-size: 1.25rem; /* Tamaño de la fuente para el título de la característica */
+    font-weight: bold; /* Negrita para el título */
+    margin-bottom: 0.5rem; /* Espacio debajo del título */
+}
+
+.feature-description {
+    font-size: 1rem; /* Tamaño de la fuente para la descripción */
+    color: #666; /* Color de la fuente para la descripción */
+}

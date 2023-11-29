@@ -1,0 +1,33 @@
+.sport-slide {
+  position: relative;
+  text-align: center;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.sport-slide img {
+  padding-top: 50px;
+  width: 16%;
+  position: absolute; /* Coloca la imagen en posición absoluta para que esté detrás del texto */
+  top: 0; /* Coloca la imagen en la parte superior del carrusel */
+  left: 42%; /* Coloca la imagen en el centro horizontal del carrusel */
+  z-index: -1; /* Envía la imagen detrás del texto */
+  opacity: 0.2;
+}
+
+.sport-slide h3{
+  font-size: 60px;
+  color: #000000;
+  position: relative; /* Coloca el texto en posición relativa para que esté por encima de la imagen */
+  z-index: 1; /* Envía el texto por encima de la imagen */
+}
+
+.sport-slide p {
+  font-size: 50px;
+  color: #000000;
+  position: relative; /* Coloca el texto en posición relativa para que esté por encima de la imagen */
+  z-index: 1; /* Envía el texto por encima de la imagen */
+}

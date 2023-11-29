@@ -1,0 +1,50 @@
+/* UsersList.css */
+.users-list {
+  text-align: center;
+  padding: 20px;
+}
+
+h1 {
+  text-align: center;
+  font-size: 40px;
+  font-weight: bold;
+  margin: 0;
+  text-shadow: 0px 5px 5px rgba(0, 0, 0, 0.15);
+  padding: 20px;
+}
+
+.users-list table {
+  margin: 20px auto;
+  border-collapse: collapse;
+  width: 80%;
+  box-shadow: 0px 4px 10px -3px rgba(0, 0, 0, 0.1);
+}
+
+.users-list th, .users-list td {
+  padding: 10px;
+  text-align: center;
+}
+
+.users-list th {
+  background-color: #17cf97;
+  color: #fff;
+  font-weight: bold;
+}
+
+.users-list tr:nth-child(even) {
+  background-color: #f2f2f2; /* Cambia el color de fondo de filas pares */
+}
+
+.users-list button.delete-button {
+  background-color: #ef5252;
+  color: #fff;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.users-list button.delete-button:hover {
+  background-color: #ff0000;
+}

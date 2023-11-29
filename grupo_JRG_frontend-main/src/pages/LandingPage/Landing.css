@@ -1,0 +1,39 @@
+.brand-name {
+  text-align: center;
+  font-size: 100px;
+  font-weight: bold;
+  text-shadow: 0px 5px 5px rgba(0, 0, 0, 0.15);
+  letter-spacing: 20px;
+}
+
+main {
+  text-align: center;
+  background-color: rgba(111, 204, 176, 0.349);
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  align-items: center;
+  margin: 0 auto;
+  background-color: rgba(111, 204, 176, 0.349);
+  padding: 30px 0;
+}
+main h3 {
+  font-size: 28px;
+  margin: 10px 0;
+  font-weight: bold;
+} 
+
+main p {
+  width: 80%;
+}
+
+/* Estilos de contacto */
+.contact {
+  padding-bottom: 50px;
+  text-align: center;
+}
+
+.contact h3 {
+  font-size: 28px;
+  font-weight: bold;
+}
