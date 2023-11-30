@@ -5,6 +5,7 @@ import dayjs from 'dayjs';
 import { BsEyeFill } from "react-icons/bs";
 import "./MatchView.css";
 import Rating from '@mui/material/Rating';
+import API_URL from "../../common/config";
 
 function MatchView() {
   const { teamId } = useParams();
@@ -16,13 +17,13 @@ function MatchView() {
     const fetchData = async () => {
       try {
         const responseMyTeam = await axios.get(
-          `${import.meta.env.VITE_BACKEND_URL}/teams/${teamId}`
+          `${API_URL}/teams/${teamId}`
         );
         const responseAllTeams = await axios.get(
-          `${import.meta.env.VITE_BACKEND_URL}/teams`
+          `${API_URL}/teams`
         );
         const responseMatchs = await axios.get(
-          `${import.meta.env.VITE_BACKEND_URL}/matches/team/${teamId}`
+          `${API_URL}/matches/team/${teamId}`
         );
         setMyTeam(responseMyTeam.data);
         setAllTeams(responseAllTeams.data);

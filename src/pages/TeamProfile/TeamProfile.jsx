@@ -10,6 +10,7 @@ import Rating from '@mui/material/Rating';
 import TeamChat from '../../chat/TeamChat';
 import { FaUserMinus } from "react-icons/fa";
 import { FaUserLock } from "react-icons/fa";
+import API_URL from '../../common/config';
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -48,18 +49,18 @@ function TeamProfile() {
                       'Authorization': `Bearer ${token}`
                     }
                   };
-                const teamInfoResponse = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/teams/${teamId}`);
-                const captainResponse = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/users/${teamInfoResponse.data.captainId}`, config);
-                const teamUsersResponse = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/teamusers/team/${teamId}`);
+                const teamInfoResponse = await axios.get(`${API_URL}/teams/${teamId}`);
+                const captainResponse = await axios.get(`${API_URL}/users/${teamInfoResponse.data.captainId}`, config);
+                const teamUsersResponse = await axios.get(`${API_URL}/teamusers/team/${teamId}`);
                 const teamUsernamesResponse = await Promise.all(
                     teamUsersResponse.data.map(async (teamUser) => {
-                        const userResponse = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/users/${teamUser.idUser}`, config);
+                        const userResponse = await axios.get(`${API_URL}/users/${teamUser.idUser}`, config);
                         return userResponse.data;
                     })
                 );
-                const usernameResponse = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/users/${userId}`, config);
+                const usernameResponse = await axios.get(`${API_URL}/users/${userId}`, config);
 
-                const matchRequestResponse = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/matches/team/${teamId}`);
+                const matchRequestResponse = await axios.get(`${API_URL}/matches/team/${teamId}`);
                 // Saber si tengo un match con location = pending entonces poner true en isMatchPending
                 const matchRequestPending = matchRequestResponse.data.some(matchRequest => matchRequest.location === 'pending');
                 setIsMatchPending(matchRequestPending);
@@ -84,14 +85,14 @@ function TeamProfile() {
         try {
             const confirmDelete = window.confirm('¿Estás seguro de que quieres eliminar a este usuario del equipo?');
             if (confirmDelete) {
-                await axios.delete(`${import.meta.env.VITE_BACKEND_URL}/teamusers/${teamUserId}/${teamId}`);
+                await axios.delete(`${API_URL}/teamusers/${teamUserId}/${teamId}`);
 
-                const teamUserRequest = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/teamUnionRequests/user/${teamUserId}`);
+                const teamUserRequest = await axios.get(`${API_URL}/teamUnionRequests/user/${teamUserId}`);
 
                 const teamRequestToDelete = teamUserRequest.data.find(teamRequest => teamRequest.idTeam === Number(teamId));
 
                 if (teamRequestToDelete) {
-                    await axios.delete(`${import.meta.env.VITE_BACKEND_URL}/teamUnionRequests/${teamRequestToDelete.id}`);
+                    await axios.delete(`${API_URL}/teamUnionRequests/${teamRequestToDelete.id}`);
                 }
                 const newTeamUsernames = teamUsernames.filter((teamUsername) => teamUsername.id !== teamUserId);
                 setTeamUsernames(newTeamUsernames);
@@ -107,7 +108,7 @@ function TeamProfile() {
 
     const handleSwitchChange = async (event) => {
         try {
-            await axios.put(`${import.meta.env.VITE_BACKEND_URL}/teams/${teamId}`, {
+            await axios.put(`${API_URL}/teams/${teamId}`, {
                 acceptRequest: event.target.checked,
             });
             setAcceptRequest(!event.target.checked);

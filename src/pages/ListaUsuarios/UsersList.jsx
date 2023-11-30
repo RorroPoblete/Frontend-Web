@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './UsersList.css';
+import API_URL from '../../common/config';
 
 function UsersList() {
     const [users, setUsers] = useState([]);
     
     useEffect(() => {
         // Realiza una solicitud para obtener la lista de usuarios desde tu servidor local
-        axios.get(`${import.meta.env.VITE_BACKEND_URL}/users`)
+        axios.get(`${API_URL}/users`)
         .then((response) => {
             setUsers(response.data);
         })
@@ -18,7 +19,7 @@ function UsersList() {
 
     const handleDeleteUser = (userId) => {
         // Realiza una solicitud para eliminar un usuario desde tu servidor local
-        axios.delete(`${import.meta.env.VITE_BACKEND_URL}/users/${userId}`)
+        axios.delete(`${API_URL}/users/${userId}`)
         .then((response) => {
             console.log('User deleted successfully:', response.data);
             // Actualiza la lista de usuarios

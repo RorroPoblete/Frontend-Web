@@ -8,6 +8,7 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import MuiAlert from '@mui/material/Alert';
+import API_URL from '../../common/config';
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
@@ -74,13 +75,13 @@ function MatchDetails() {
     const fetchData = async () => {
       try {
         const responseMatch = await axios.get(
-          `${import.meta.env.VITE_BACKEND_URL}/matches/${matchId}`
+          `${API_URL}/matches/${matchId}`
         );
         const responseTeam1 = await axios.get(
-          `${import.meta.env.VITE_BACKEND_URL}/teams/${responseMatch.data.idTeam1}`
+          `${API_URL}/teams/${responseMatch.data.idTeam1}`
         );
         const responseTeam2 = await axios.get(
-          `${import.meta.env.VITE_BACKEND_URL}/teams/${responseMatch.data.idTeam2}`
+          `${API_URL}/teams/${responseMatch.data.idTeam2}`
         );
         setMatch(responseMatch.data);
         setMyTeam(responseTeam1.data);
@@ -120,7 +121,7 @@ function MatchDetails() {
     // Aquí puedes enviar la información actualizada al servidor o realizar otras acciones necesarias.
     try {
       const response = axios.put(
-        `${import.meta.env.VITE_BACKEND_URL}/matches/${matchId}`,
+        `${API_URL}/matches/${matchId}`,
         {
           gameTime: selectedDateTime.toISOString(),
           location: newLocation,

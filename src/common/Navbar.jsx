@@ -7,6 +7,7 @@ import { useState, useEffect, useContext } from "react";
 import { AuthContext } from "../auth/AuthContext";
 import Badge from '@mui/material/Badge';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import API_URL from '../common/config';
 
 function Navbar() {
   const { token } = useContext(AuthContext);
@@ -15,7 +16,7 @@ function Navbar() {
   const [pendingRequestWhereIAmCaptain, setPendingRequestWhereIAmCaptain] = useState(0);
   const config = {
     'method': 'get',
-    'url': `${import.meta.env.VITE_BACKEND_URL}/scope-example/protecteduser`,
+    'url': `${API_URL}/scope-example/protecteduser`,
     'headers': {
       'Authorization': `Bearer ${token}`
     }
@@ -30,7 +31,7 @@ function Navbar() {
       });
       const fetchData = async () => {
         try {
-          const teamsUnionRequestWhereIAmCaptain = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/teamUnionRequests/captain/${userId}`);
+          const teamsUnionRequestWhereIAmCaptain = await axios.get(`${API_URL}/teamUnionRequests/captain/${userId}`);
           const pendingRequestsCaptain = teamsUnionRequestWhereIAmCaptain.data.filter((request) => request.state === 'pending');
           const numberOfPendingRequestsCaptain = pendingRequestsCaptain.length;
           setPendingRequestWhereIAmCaptain(numberOfPendingRequestsCaptain);

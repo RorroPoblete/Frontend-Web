@@ -8,6 +8,7 @@ import { FaUserClock } from "react-icons/fa";
 import { FaCheckSquare } from "react-icons/fa";
 import Rating from '@mui/material/Rating';
 import CircularProgress from '@mui/material/CircularProgress';
+import API_URL from '../../common/config';
 
 function JoinTeam() {
     const [teams, setTeams] = useState(null);
@@ -22,14 +23,14 @@ function JoinTeam() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const teamsResponse = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/teams`);
+                const teamsResponse = await axios.get(`${API_URL}/teams`);
                 setTeams(teamsResponse.data);
 
-                const teamUserResponse = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/teamusers/user/${userId}`);
+                const teamUserResponse = await axios.get(`${API_URL}/teamusers/user/${userId}`);
                 const teamsIds = teamUserResponse.data.map((teamUser) => teamUser.idTeam);
                 setTeamWhereIsUser(teamsIds);
 
-                const pendingRequestsResponse = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/teamUnionRequests/user/${userId}`);
+                const pendingRequestsResponse = await axios.get(`${API_URL}/teamUnionRequests/user/${userId}`);
                 const pendingRequestsIds = pendingRequestsResponse.data.map((request) => request.idTeam);
                 setPendingRequests(pendingRequestsIds);
 
@@ -42,7 +43,7 @@ function JoinTeam() {
       
     const requestToJoinTeam = async (teamId) => {
         try {
-            await axios.post(`${import.meta.env.VITE_BACKEND_URL}/teamUnionRequests`, {
+            await axios.post(`${API_URL}/teamUnionRequests`, {
                 idTeam: teamId,
                 idUser: userId,
                 state: 'pending',

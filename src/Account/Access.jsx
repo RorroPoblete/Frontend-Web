@@ -3,6 +3,7 @@ import axios from 'axios';
 import "./Access.css";
 import { AuthContext } from '../auth/AuthContext';
 import { useNavigate } from 'react-router-dom';
+import API_URL from '../common/config';
 
 export default function Access() {
     const { setToken } = useContext(AuthContext);
@@ -35,7 +36,7 @@ export default function Access() {
         };
 
         try {
-            const registerResponse = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/signup`, userData);
+            const registerResponse = await axios.post(`${API_URL}/signup`, userData);
             setMessage('Cuenta creada con éxito. Iniciando sesión...');
             handleLogin(registerEmail, registerPassword);
         } catch (error) {
@@ -51,7 +52,7 @@ export default function Access() {
 
     async function handleLogin(email, password) {
         try {
-            const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/login`, {
+            const response = await axios.post(`${API_URL}/login`, {
                 mail: email, 
                 password: password
             });

@@ -1,8 +1,10 @@
 import { useState, useEffect, useRef } from "react";
 import io from "socket.io-client";
 import "./TeamChat.css";
+import API_URL from '../common/config';
 
-const socket = io.connect("http://localhost:3001"); //TODO: cambiar por la url del env
+const socket = io.connect(API_URL);
+
 
 // Asume que teamId se pasa como prop al componente TeamChat
 export default function TeamChat({ teamId, username }) {
@@ -28,7 +30,7 @@ export default function TeamChat({ teamId, username }) {
         // Recuperar mensajes antiguos del backend
         const fetchMessages = async () => {
             try {
-                const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/chats/${teamId}/messages`);
+                const response = await axios.get(`${API_URL}/chats/${teamId}/messages`);
                 setChat(response.data);
             } catch (error) {
                 console.error("Error al recuperar mensajes:", error);
@@ -58,7 +60,7 @@ export default function TeamChat({ teamId, username }) {
             socket.emit("send_message", messageData);
 
             try {
-                await axios.post(`${import.meta.env.VITE_BACKEND_URL}/chats/${teamId}/messages`, {
+                await axios.post(`${API_URL}/chats/${teamId}/messages`, {
                   content: message,
                 //   senderId: /* id del usuario */,
                 });

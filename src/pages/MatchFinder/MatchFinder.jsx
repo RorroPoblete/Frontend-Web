@@ -8,6 +8,7 @@ import Footer from '../../common/Footer';
 import CircularProgress from '@mui/material/CircularProgress';
 import './MatchFinder.css';
 import dayjs from 'dayjs';
+import API_URL from '../../common/config';
 
 
 
@@ -34,12 +35,12 @@ function MatchFinder() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const responseMyTeam = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/teams/${teamId}`);
-        const responseAllTeams = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/teams`);
+        const responseMyTeam = await axios.get(`${API_URL}/teams/${teamId}`);
+        const responseAllTeams = await axios.get(`${API_URL}/teams`);
         const filteredTeams = responseAllTeams.data.filter((team) => team.sport === responseMyTeam.data.sport);
         const filteredTeams2 = filteredTeams.filter((team) => team.id !== responseMyTeam.data.id);
         // Filtrar los equipos con los que ya le has dado like
-        const responseMatchRequests = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/matchRequests/requester/${teamId}`);
+        const responseMatchRequests = await axios.get(`${API_URL}/matchRequests/requester/${teamId}`);
         const filteredTeams3 = filteredTeams2.filter((team) => !responseMatchRequests.data.some(request => request.teamIdReceiver === team.id));
         setMyTeam(responseMyTeam.data);
         setAllTeams(filteredTeams3);
@@ -72,7 +73,7 @@ function MatchFinder() {
 
   const handleLikeTeam = async (teamId) => {
     try {
-      const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/matchRequests`, {
+      const response = await axios.post(`${API_URL}/matchRequests`, {
         teamIdRequester: myTeam.id,
         teamIdReceiver: teamId
       });
@@ -85,7 +86,7 @@ function MatchFinder() {
   }
   const isTeamRequesterAlreadyLikedByTeamReceiver = async (teamIdReceiver) => {
     try {
-      const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/matchRequests/requester/${teamIdReceiver}`);
+      const response = await axios.get(`${API_URL}/matchRequests/requester/${teamIdReceiver}`);
       console.log(response.data, 'requests del equipo receptor');
       
       // Si dentro de las requests del equipo receptor ya está el equipo que le ha dado like (myTeam),
@@ -101,7 +102,7 @@ function MatchFinder() {
 
   const createMatch = async (teamIdReceiver) => {
     try {
-      const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/matches`, {
+      const response = await axios.post(`${API_URL}/matches`, {
         idTeam1: myTeam.id,
         idTeam2: teamIdReceiver,
         result: 'pending',

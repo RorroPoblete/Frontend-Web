@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import './CreateTeam.css'; // Importa el archivo CSS
 import 'jwt-decode';
 import Footer from "../../common/Footer";
+import API_URL from '../../common/config';
 
 function CreateTeam() {
   const [teamName, setName] = useState("");
@@ -18,7 +19,7 @@ function CreateTeam() {
         const token = localStorage.getItem('token');
         const decodedToken = jwtDecode(token);
         const userId = decodedToken.id;
-        const createTeamResponse = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/teams`, {
+        const createTeamResponse = await axios.post(`${API_URL}/teams`, {
             teamName,
             qualification,
             sport,
@@ -27,7 +28,7 @@ function CreateTeam() {
         });
         const teamId = createTeamResponse.data.id;
 
-        await axios.post(`${import.meta.env.VITE_BACKEND_URL}/teamusers`, {
+        await axios.post(`${API_URL}/teamusers`, {
             idTeam: teamId,
             idUser: userId,
         });

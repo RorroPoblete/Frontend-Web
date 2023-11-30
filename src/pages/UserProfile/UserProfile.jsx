@@ -13,6 +13,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import MuiAlert from '@mui/material/Alert';
 import Rating from '@mui/material/Rating';
 import VisibilityIcon from '@mui/icons-material/Visibility';
+import API_URL from '../../common/config';
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
@@ -52,25 +53,25 @@ function UserProfile() {
         };
 
         // 0. PARA CONTENEDOR INICIAL: LLAMADO DE DATOS DE USUARIO
-        const userResponse = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/users/${userId}`, config);
+        const userResponse = await axios.get(`${API_URL}/users/${userId}`, config);
 
         // 1. PARA PRIMER CONTENEDOR: LLAMADO DE LOS EQUIPOS DEL USUARIO
-        const userTeamsResponse = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/teams/user/${userId}`);
+        const userTeamsResponse = await axios.get(`${API_URL}/teams/user/${userId}`);
 
         // 2. PARA SEGUNDO CONTENEDOR: LLAMADO DE TODAS MIS SOLICITUDES
-        const userRequestsResponse = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/teamUnionRequests/user/${userId}`);
+        const userRequestsResponse = await axios.get(`${API_URL}/teamUnionRequests/user/${userId}`);
 
         // 2.1 PARA SEGUNDO CONTENEDOR: LLAMADO DE TODOS LOS EQUIPOS DONDE TENGO SOLICITUDES
-        const userTeamsRequestResponde = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/teams/userRequest/${userId}`);
+        const userTeamsRequestResponde = await axios.get(`${API_URL}/teams/userRequest/${userId}`);
 
         // 3. PARA TERCER CONTENEDOR: LLAMADO DE TODOS LOS EQUIPOS DONDE TENGO SOLICITUDES Y SOY CAPITAN (Y ESTAN PENDIENTES)
-        const teamsUnionRequestWhereIAmCaptain = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/teamUnionRequests/captain/${userId}`);
+        const teamsUnionRequestWhereIAmCaptain = await axios.get(`${API_URL}/teamUnionRequests/captain/${userId}`);
         const pendingRequestsCaptain = teamsUnionRequestWhereIAmCaptain.data.filter((request) => request.state === 'pending');
 
         // 3.1 PARA TERCER CONTENEDOR: LLAMADO DE NOMBRE DE LOS USUARIOS QUE HACEN SOLICITUDES A MI EQUIPO
         const pendingUsersRequestWhereIAmCaptain = await Promise.all(
           pendingRequestsCaptain.map(async (request) => {
-            const userRequestResponse = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/users/${request.idUser}`, config);
+            const userRequestResponse = await axios.get(`${API_URL}/users/${request.idUser}`, config);
             return userRequestResponse.data;
           })
         );
@@ -95,12 +96,12 @@ function UserProfile() {
     try {
       const confirmDelete = window.confirm('¿Estás seguro de salir del equipo?');
       if (confirmDelete) {
-        await axios.delete(`${import.meta.env.VITE_BACKEND_URL}/teamusers/${userId}/${teamId}`);
-        const userTeamRequest = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/teamUnionRequests/user/${userId}`);
+        await axios.delete(`${API_URL}/teamusers/${userId}/${teamId}`);
+        const userTeamRequest = await axios.get(`${API_URL}/teamUnionRequests/user/${userId}`);
         const teamRequestToDelete = userTeamRequest.data.find(request => request.idTeam === teamId);
   
         if (teamRequestToDelete) {
-          await axios.delete(`${import.meta.env.VITE_BACKEND_URL}/teamUnionRequests/${teamRequestToDelete.id}`);
+          await axios.delete(`${API_URL}/teamUnionRequests/${teamRequestToDelete.id}`);
         }
         // Actualizar los equipos después de eliminar un equipo
         const updatedUserTeams = userTeams.filter((team) => team.id !== teamId);
@@ -131,7 +132,7 @@ function UserProfile() {
     try {
       const confirmDelete = window.confirm('¿Estás seguro de eliminar tu solicitud?');
       if (confirmDelete) {
-        await axios.delete(`${import.meta.env.VITE_BACKEND_URL}/teamUnionRequests/${requestId}`);
+        await axios.delete(`${API_URL}/teamUnionRequests/${requestId}`);
         // Actualizar las solicitudes pendientes después de eliminar una solicitud
         const updatedPendingRequests = userRequests.filter((request) => request.id !== requestId);
         setUserRequests(updatedPendingRequests);
@@ -149,7 +150,7 @@ function UserProfile() {
     try {
       const confirmDecline = window.confirm('¿Estás seguro de rechazar la solicitud?');
       if (confirmDecline) {
-        await axios.put(`${import.meta.env.VITE_BACKEND_URL}/teamUnionRequests/${requestId}`, {
+        await axios.put(`${API_URL}/teamUnionRequests/${requestId}`, {
           state: 'declined',
         });
         // Actualizar las solicitudes pendientes después de eliminar una solicitud
@@ -171,10 +172,10 @@ function UserProfile() {
     try {
       const confirmAccept = window.confirm('¿Estás seguro de aceptar la solicitud?');
       if (confirmAccept) {
-        await axios.put(`${import.meta.env.VITE_BACKEND_URL}/teamUnionRequests/${requestId}`, {
+        await axios.put(`${API_URL}/teamUnionRequests/${requestId}`, {
           state: 'accepted',
         });
-        await axios.post(`${import.meta.env.VITE_BACKEND_URL}/teamusers`, {
+        await axios.post(`${API_URL}/teamusers`, {
           idTeam: idTeam,
           idUser: idUser,
         });

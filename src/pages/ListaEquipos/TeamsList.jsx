@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './TeamsList.css';
+import API_URL from '../../common/config';
 
 function TeamsList() {
     const [teams, setTeams] = useState([]);
 
     useEffect(() => {
         // Realiza una solicitud para obtener la lista de usuarios desde tu servidor local
-        axios.get(`${import.meta.env.VITE_BACKEND_URL}/teams`)
+        axios.get(`${API_URL}/teams`)
         .then((response) => {
             setTeams(response.data);
         })
@@ -18,7 +19,7 @@ function TeamsList() {
       
     const handleDeleteTeam = (teamId) => {
         // Realiza una solicitud para eliminar un usuario desde tu servidor local
-        axios.delete(`${import.meta.env.VITE_BACKEND_URL}/teams/${teamId}`)
+        axios.delete(`${API_URL}/teams/${teamId}`)
         .then((response) => {
             console.log('Team deleted successfully:', response.data);
             // Actualiza la lista de usuarios
@@ -37,7 +38,7 @@ function TeamsList() {
         }
       
         // Realiza una solicitud POST para agregar un jugador al equipo
-        axios.post(`${import.meta.env.VITE_BACKEND_URL}/teamusers`, {
+        axios.post(`${API_URL}/teamusers`, {
           idTeam: teamId,
           idUser: newTeamUser,
         })
