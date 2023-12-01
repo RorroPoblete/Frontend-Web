@@ -43,7 +43,7 @@ function MatchView() {
 
   return (
     <div className='match-view-container'>
-      <h1>Equipo {myTeam.teamName}</h1>
+      <h1>{myTeam.teamName}</h1>
       <div className='matchs-container'>
         <h1>Todos mis Matchs</h1>
         <table>

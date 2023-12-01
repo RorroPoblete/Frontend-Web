@@ -59,6 +59,7 @@ export default function Access() {
 
             const access_token = response.data.access_token;
             if (access_token) {
+                setMessage('Iniciando sesión...');
                 setToken(access_token);
                 navigate('/principal?success=login');
             } else {

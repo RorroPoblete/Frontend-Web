@@ -170,7 +170,7 @@ function MatchFinder() {
                 className="card"
               >
                 <h5>{team.sport}</h5>
-                <h3>{team.teamName}</h3>
+                <h5>{team.teamName}</h5>
                 <Rating className="rating" name="read-only" value={team.qualification} readOnly />
               </div>
             </TinderCard>
