@@ -11,26 +11,32 @@ import TeamChat from '../../chat/TeamChat';
 import { FaUserMinus } from "react-icons/fa";
 import { FaUserLock } from "react-icons/fa";
 import API_URL from '../../common/config';
+import { useNavigate } from 'react-router-dom';
+import { FaPencil } from "react-icons/fa6";
+import { fontSize } from '@mui/system';
+import { IoIosSave } from "react-icons/io";
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
 function TeamProfile() {
+    const { teamId } = useParams();
     const [teamInfo, setTeamInfo] = useState(null);
     const [teamUsers, setTeamUsers] = useState([]);
     const [teamUsernames, setTeamUsernames] = useState([]);
     const [captainUsername, setCaptainUsername] = useState('');
-    const { teamId } = useParams();
     const [initialMessage, setInitialMessage] = useState('');
     const [createTeamInitialMessage, setCreateTeamInitialMessage] = useState('');
     const [deleteTeamUserMessage, setDeleteTeamUserMessage] = useState('');
     const [username, setUsername] = useState('');
     const [isMatchPending, setIsMatchPending] = useState(false);
+    const [isEditingTeamName, setIsEditingTeamName] = useState(false);
 
     const token = localStorage.getItem('token');
     const decodedToken = jwtDecode(token);
     const userId = decodedToken.id;
+    const navigate = useNavigate();
 
     // Botones de aceptar solicitudes
     const [acceptRequest, setAcceptRequest] = useState(teamInfo?.acceptRequest || false);
@@ -122,6 +128,42 @@ function TeamProfile() {
         }
     };
 
+    const handleDeleteTeam = async () => {
+        try {
+            const confirmDelete = window.confirm('¿Estás seguro de que quieres eliminar este equipo?');
+            if (confirmDelete) {
+                // Al eliminar equipo quiero borrar todos los teamusers asociados a ese equipo
+                // el endpoint es teamusers.delete", "/:userId/:teamId"
+                await teamUsers.map(async (teamUser) => {
+                    axios.delete(`${API_URL}/teamusers/${teamUser.idUser}/${teamId}`);
+                });
+                // Al eliminar equipo quiero borrar todos los teamUnionRequest, 
+                // para esto tengo que ver todas las request que apuntan a este teamId 
+                // con request.idTeam === teamId y borrar todas esas request
+                const teamUnionRequests = await axios.get(`${API_URL}/teamUnionRequests/team/${teamId}`);
+                teamUnionRequests.data.map(async (teamUnionRequest) => {
+                    await axios.delete(`${API_URL}/teamUnionRequests/${teamUnionRequest.id}`);
+                });
+                await axios.delete(`${API_URL}/teams/${teamId}`);
+                navigate('/userProfile?success=deleteTeam');
+            }
+        } catch (error) {
+            console.error('Error al eliminar equipo:', error);
+        }
+    }
+
+    const handleUpdateTeamName = async () => {
+        try {
+            await axios.put(`${API_URL}/teams/${teamId}`, {
+                teamName: teamInfo.teamName,
+            });
+            setIsEditingTeamName(false);
+        } catch (error) {
+            console.error('Error al cambiar el nombre del equipo:', error);
+        }
+    }
+
+
     if (!teamInfo) {
         return (
             <>
@@ -150,7 +192,28 @@ function TeamProfile() {
                     </div>
                 )}
                 <div className="team-container">
-                    <h1>{teamInfo.teamName}</h1>
+                    {!isEditingTeamName ? (
+                        <div className="name-container">
+                            <h1>
+                                {teamInfo.teamName} 
+                            </h1>
+                            <button onClick={() => setIsEditingTeamName(true)}>
+                                <FaPencil 
+                                    className='edit-team-name' 
+                                />
+                            </button>
+                        </div>
+                    ) : (
+                        <div className="change-name-container">
+                            <input
+                                type="text"
+                                value={teamInfo.teamName}
+                                onChange={(e) => setTeamInfo({ ...teamInfo, teamName: e.target.value })}
+                            />
+                            <button onClick={handleUpdateTeamName}><IoIosSave /></button>
+                        </div>
+                    )}
+                
                     <div className='team-actions'>
                         {isCaptain && 
                             <a
@@ -172,16 +235,11 @@ function TeamProfile() {
                         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
                             <Rating name="read-only" value={Number(teamInfo.qualification)} readOnly />
                         </div>
-                        <div className="team-info">
-                            <h3>Información</h3>
-                            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
-                                <Rating name="read-only" value={Number(teamInfo.qualification)} readOnly />
-                            </div>
-                            <p><strong>Deporte:</strong> {teamInfo.sport}</p>
-                            <p><strong>Capitán:</strong> {captainUsername}</p> 
-                        </div>
+                        <p><strong>Deporte:</strong> {teamInfo.sport}</p>
+                        <p><strong>Capitán:</strong> {captainUsername}</p> 
                     </div>
-                    {teamUsernames && (
+                </div>
+                {teamUsernames && (
                         <div className="team-users-container">
                             <div className="team-users-header">
                                 {isCaptain && (
@@ -231,64 +289,14 @@ function TeamProfile() {
                             </table>
                         </div>
                     )}
-                    <div className="team-buttons-container">
-                        <button className="team-button" title="Disponible para la E4">Editar equipo</button>
-                        <button className="team-button" title="Disponible para la E4">Eliminar equipo</button>
-                    </div>
-                </div>
-                {teamUsernames && (
-                    <div className="team-users-container">
-                        {isCaptain && (
-                            <div className="team-users-header">
-                                <h2>Aceptar solicitudes de unión</h2>
-                                <Switch 
-                                    checked={acceptRequest} 
-                                    onChange={handleSwitchChange}
-                                />
-                            </div>
-                        )}
-                        <h2>Miembros del equipo:</h2>
-                        <table>
-                            <thead>
-                                <th>Nombre</th>
-                                <th>Correo electrónico</th>
-                                <th>Calificación</th>
-                                <th>Sanción</th>
-                                {isCaptain && <th>Acciones</th>}
-                            </thead>
-                            <tbody>
-                                {teamUsernames.map((teamUsername, index) => (
-                                    <tr key={index}>
-                                        <td>{teamUsernames[index]?.username || 'Usuario no encontrado'}</td>
-                                        <td>{teamUsernames[index]?.mail || 'Usuario no encontrado'}</td>
-                                        <td>{<Rating name="read-only" value={Number(teamUsernames[index]?.qualification)} precision={0.1} readOnly /> || 'Usuario no encontrado'}</td>
-                                        <td>{teamUsernames[index]?.sanction === false ? 'Usuario no sancionado' : 'Usuario sancionado'}</td>
-                                        {isCaptain && (
-                                        <td>
-                                            <button
-                                                className={teamUsernames[index]?.id === userId ? "disabled-button" : "delete-button"}
-                                                onClick={() => {
-                                                    if (teamUsernames[index]?.id !== userId) {
-                                                        handleDeleteTeamUser(teamUsernames[index].id);
-                                                    }
-                                                }}
-                                                disabled={teamUsernames[index]?.id === userId}
-                                            >
-                                                {teamUsernames[index]?.id === userId 
-                                                    ? <FaUserLock style={{ color: '#1b2430', fontSize: '1.5em' }} /> 
-                                                    : <FaUserMinus style={{ color: 'white', fontSize: '1.5em' }} />}
-                                            </button>
-                                        </td>
-                                        )}
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </table>
-                    </div>
-                )}
                 <div className="team-buttons-container">
-                    <button className="team-button" title="Disponible para la E4">Editar equipo</button>
-                    <button className="team-button" title="Disponible para la E4">Eliminar equipo</button>
+                    <button 
+                        className="delete-button" 
+                        title="Se eliminar todos los usuarios del equipo y el equipo en sí"
+                        onClick={handleDeleteTeam}
+                    >
+                        Eliminar equipo
+                    </button>
                 </div>
                 <div className="team-chat-container">
                     <TeamChat teamId={teamId} username={username} />

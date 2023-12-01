@@ -1,4 +1,3 @@
-import { styled } from '@mui/system';
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import dayjs from 'dayjs';
@@ -9,55 +8,11 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import MuiAlert from '@mui/material/Alert';
 import API_URL from '../../common/config';
+import './MatchDetails.css';
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 const today = dayjs();
-
-const ContainerMatchView = styled('div')({
-  width: '50%',
-  justifyContent: 'space-around',
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'center',
-  margin: 'auto',
-  padding: '40px',
-  backgroundColor: '#f0f0f0',
-  borderRadius: '8px',
-  boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.1)',
-  marginTop: '20px',
-});
-
-const SectionTitle = styled('h1')({
-  fontSize: '24px',
-  marginBottom: '16px',
-});
-
-const SubTitle = styled('h2')({
-  fontSize: '18px',
-  marginTop: '10px',
-});
-
-const Label = styled('label')({
-  display: 'block',
-  marginTop: '10px',
-});
-
-const Input = styled('input')({
-  width: '100%',
-  padding: '8px',
-  boxSizing: 'border-box',
-  marginTop: '5px',
-});
-
-const Button = styled('button')({
-  padding: '10px 20px',
-  backgroundColor: '#4caf50',
-  color: 'white',
-  borderRadius: '5px',
-  cursor: 'pointer',
-  marginTop: '20px',
-});
 
 function MatchDetails() {
   const { matchId } = useParams();
@@ -142,42 +97,45 @@ function MatchDetails() {
   return (
     <>
       {updateAlert && <Alert severity="success">{updateAlert}</Alert>}
-      <ContainerMatchView className="container-match-view">
-        <SectionTitle>Detalles del Partido</SectionTitle>
-        <SectionTitle>{Team1.teamName} VS {Team2.teamName}</SectionTitle>
-        <SubTitle>Fecha y Hora: {dayjs(match.gameTime).format('DD/MM/YY HH:mm')}</SubTitle>
-        <SubTitle>Lugar: {match.location}</SubTitle>
-        <SubTitle>Resultado: {match.result}</SubTitle>
+      <div className="container-match-view">
+        <h2>Detalles del Partido</h2>
+        <h1>{Team1.teamName} V/S {Team2.teamName}</h1>
+        <p>Fecha y Hora: {dayjs(match.gameTime).format('DD/MM/YY HH:mm')}</p>
+        <p>Lugar: {match.location}</p>
+        <p>Resultado: {match.result}</p>
         <Rating name="read-only" value={Number(match.qualification)} precision={0.1} readOnly />
-        <LocalizationProvider dateAdapter={AdapterDayjs}>
-          <DateTimePicker
-            fontFamily="Red Hat Display"
-            value={selectedDateTime}
-            disablePast
-            format="DD/MM/YYYY HH:mm"
-            onChange={handleDateTimeChange}
-          />
-        </LocalizationProvider>
-        <label>
-          Nueva Ubicación:
-          <input type="text" value={newLocation} onChange={handleLocationChange} />
-        </label>
-        <label>
-          Nuevo Resultado:
-          <input type="text" value={newResult} onChange={handleResultChange} />
-        </label>
-        <label>
-          Nueva Calificación:
-          <Rating
-            name="new-rating"
-            value={newQualification}
-            onChange={(event, value) => handleQualificationChange(value)}
-          />
-        </label>
-        <button onClick={handleSubmit} disabled={!isValidSelection}>
-          Actualizar Detalles del Partido
-        </button>
-      </ContainerMatchView>
+        <div className='container-actualizar'>
+          <h2>Actualiza los detalles del partido:</h2>
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <DateTimePicker
+              fontFamily="Red Hat Display"
+              value={selectedDateTime}
+              disablePast
+              format="DD/MM/YYYY HH:mm"
+              onChange={handleDateTimeChange}
+            />
+          </LocalizationProvider>
+          <label>
+            Nueva Ubicación:
+            <input type="text" value={newLocation} onChange={handleLocationChange} />
+          </label>
+          <label>
+            Nuevo Resultado:
+            <input type="text" value={newResult} onChange={handleResultChange} />
+          </label>
+          <label>
+            Nueva Calificación:
+            <Rating
+              name="new-rating"
+              value={newQualification}
+              onChange={(event, value) => handleQualificationChange(value)}
+            />
+          </label>
+          <button onClick={handleSubmit} disabled={!isValidSelection}>
+            Actualizar Detalles del Partido
+          </button>
+        </div>
+      </div>
     </>
   );
 }

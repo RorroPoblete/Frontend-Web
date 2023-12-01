@@ -44,9 +44,58 @@
 .team-container h1 {
     display: flex;
     text-align: center;
-    color: #333;
+    color: #1b2430;
     align-items: center;
 }
+.team-container button {
+  background-color: transparent;
+  color:#1b2430;
+  font-size: 2em;
+  transition: 0.4s;
+}
+.team-container button:hover {
+  transition-duration: 0.4s;
+  color: #17cf97;
+}
+
+.name-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+.change-name-container {
+    display:flex;
+    flex-direction: row;
+    height: 100%;
+    font-family: 'Red Hat Display';
+}
+.change-name-container button {
+    background-color: #17cf97;
+    transition: 0.4s;
+    margin-left: 5px;
+    border-radius: 15px;
+}
+
+.change-name-container button:hover {
+    transition-duration: 0.4s;
+    background-color:#1b2430;
+    color:white;
+}
+
+.change-name-container input{
+  font-family: 'Red Hat Display';
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background-color: #1b2430;
+  border-radius: 15px;
+  border-color: transparent;
+  font-size: 20px;
+}
+
+
 .team-container h3 {
     text-align: center;
     border-bottom: 1px solid #ddd;
@@ -197,12 +246,11 @@
   align-items: center; /* Centra verticalmente */
 }
 
-.team-buttons-container button.team-button {
+.team-buttons-container button.delete-button {
     width: 30%;
-    cursor:no-drop;
     margin: 15px;
     padding: 10px;
-    background-color: #6d6d6d;
+    background-color: #fe5f5f;
     color: #fff;
     font-weight: bold;
     border-radius: 5px;
@@ -210,3 +258,9 @@
     box-shadow: 0px 5px 5px -3px rgba(0,0,0,0.75);
     text-decoration: none;
 }
+
+.team-buttons-container button.delete-button:hover {
+    transition-duration: 0.4s;
+    background-color: #1b2430;
+}
+

@@ -41,6 +41,7 @@ function UserProfile() {
     const urlParams = new URLSearchParams(window.location.search);
     const successParam = urlParams.get('success');
     setInitialMessage(successParam === 'joinTeam' ? 'Solicitud enviada con éxito' : '');
+    setInitialMessage(successParam === 'deleteTeam' ? 'Equipo eliminado con éxito' : '')
     setTimeout(() => {
       setInitialMessage('');
     }, 6000);
